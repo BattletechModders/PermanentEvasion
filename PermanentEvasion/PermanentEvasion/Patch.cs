@@ -32,9 +32,37 @@ namespace PermanentEvasion {
                     }
                 }
                 int evasivePipsCurrent = __instance.EvasivePipsCurrent;
+                if (Fields.LoosePip) {
+                    __instance.ConsumeEvasivePip(true);
+                    Fields.LoosePip = false;
+                }
                 int evasivePipsCurrent2 = __instance.EvasivePipsCurrent;
                 if (evasivePipsCurrent2 < evasivePipsCurrent && !__instance.IsDead && !__instance.IsFlaggedForDeath) {
                     __instance.Combat.MessageCenter.PublishMessage(new FloatieMessage(__instance.GUID, __instance.GUID, "-1 EVASION", FloatieMessage.MessageNature.Debuff));
+                }
+            }
+            catch (Exception e) {
+                Logger.LogError(e);
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(Mech), "ResolveAttackSequence")]
+    public static class Mech_ResolveAttackSequence {
+        static void Prefix(Mech __instance) {
+            Settings settings = Helper.LoadSettings();
+            try {
+                if (__instance.weightClass == WeightClass.LIGHT && settings.LightLosePip) {
+                    Fields.LoosePip = true;
+                }
+                else if (__instance.weightClass == WeightClass.MEDIUM && settings.MediumLosePip) {
+                    Fields.LoosePip = true;
+                }
+                else if (__instance.weightClass == WeightClass.HEAVY && settings.HeavyLosePip) {
+                    Fields.LoosePip = true;
+                }
+                else if (__instance.weightClass == WeightClass.ASSAULT && settings.AssaultLosePip) {
+                    Fields.LoosePip = true;
                 }
             }
             catch (Exception e) {
