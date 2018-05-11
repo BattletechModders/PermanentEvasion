@@ -4,6 +4,7 @@
         public bool MediumLosePip = false;
         public bool HeavyLosePip = false;
         public bool AssaultLosePip = false;
+        public bool OnlyAcePilot = false;
     }
 
     public static class Fields {

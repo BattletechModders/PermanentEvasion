@@ -52,17 +52,26 @@ namespace PermanentEvasion {
         static void Prefix(Mech __instance) {
             Settings settings = Helper.LoadSettings();
             try {
-                if (__instance.weightClass == WeightClass.LIGHT && settings.LightLosePip) {
-                    Fields.LoosePip = true;
+                bool acepilot = false;
+                foreach (Ability ab in __instance.pilot.Abilities) {
+                    if(ab.Def.Description.Id == "AbilityDefP8") {
+                        acepilot = true;
+                    }
                 }
-                else if (__instance.weightClass == WeightClass.MEDIUM && settings.MediumLosePip) {
-                    Fields.LoosePip = true;
-                }
-                else if (__instance.weightClass == WeightClass.HEAVY && settings.HeavyLosePip) {
-                    Fields.LoosePip = true;
-                }
-                else if (__instance.weightClass == WeightClass.ASSAULT && settings.AssaultLosePip) {
-                    Fields.LoosePip = true;
+                if ((!acepilot && settings.OnlyAcePilot) || !settings.OnlyAcePilot) {
+                    if (__instance.weightClass == WeightClass.LIGHT && settings.LightLosePip) {
+
+                        Fields.LoosePip = true;
+                    }
+                    else if (__instance.weightClass == WeightClass.MEDIUM && settings.MediumLosePip) {
+                        Fields.LoosePip = true;
+                    }
+                    else if (__instance.weightClass == WeightClass.HEAVY && settings.HeavyLosePip) {
+                        Fields.LoosePip = true;
+                    }
+                    else if (__instance.weightClass == WeightClass.ASSAULT && settings.AssaultLosePip) {
+                        Fields.LoosePip = true;
+                    }
                 }
             }
             catch (Exception e) {
