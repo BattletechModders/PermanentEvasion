@@ -22,7 +22,7 @@ OnlyAcePilot | bool | default false| set this to true if you want only ace pilot
 OnlyAcePilot is combined with the other options so if every other option is false, acepilot is useless because no mech loses pips anyway. Ace Pilot will only affect anything if atleast one type is set to true.
 
 ## Download
-Downloads can be found on [github](https://github.com/Morphyum/MechMaintenanceByCost/releases).
+Downloads can be found on [github](https://github.com/Morphyum/PermanentEvasion/releases).
     
 ## Install
 - After installing BTML, put  everything into \BATTLETECH\Mods\ folder.
