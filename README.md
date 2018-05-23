@@ -5,6 +5,7 @@ BattleTech mod (using BTML) that, let's mech keep their evasion pips when beeing
 ** Warning: Uses the experimental BTML mod loader that might change, come here again to check for updates **
 
 * install [BattleTechModLoader](https://github.com/Mpstark/BattleTechModLoader/releases) using the [instructions here](https://github.com/Mpstark/BattleTechModLoader)
+* install [ModTek](https://github.com/Mpstark/ModTek/releases) using the [instructions here](https://github.com/Mpstark/ModTek)
 
 ## Features
 - Mechs that get fired at will not lose one pip of evasion.
