@@ -7,7 +7,7 @@ namespace PermanentEvasion {
 
         public static Settings LoadSettings() {
             try {
-                using (StreamReader r = new StreamReader("mods/PermanentEvasion/settings.json")) {
+                using (StreamReader r = new StreamReader($"{PermanentEvasion.ModDirectory}/settings.json")) {
                     string json = r.ReadToEnd();
                     return JsonConvert.DeserializeObject<Settings>(json);
                 }
