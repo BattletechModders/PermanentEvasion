@@ -47,35 +47,95 @@ namespace PermanentEvasion {
         }
     }
 
-    [HarmonyPatch(typeof(Mech), "ResolveAttackSequence")]
-    public static class Mech_ResolveAttackSequence {
-        static void Prefix(Mech __instance) {
+    [HarmonyPatch(typeof(Mech), "ResolveAttackSequence", null)]
+    public static class Mech_ResolveAttackSequence
+    {
+        // Token: 0x0600000F RID: 15 RVA: 0x000023E4 File Offset: 0x000005E4
+        private static void Prefix(Mech __instance)
+        {
             Settings settings = Helper.LoadSettings();
-            try {
-                bool acepilot = false;
-                foreach (Ability ab in __instance.pilot.Abilities) {
-                    if(ab.Def.Description.Id == "AbilityDefP8") {
-                        acepilot = true;
+            try
+            {
+                bool flag = false;
+                using (List<Ability>.Enumerator enumerator = __instance.pilot.Abilities.GetEnumerator())
+                {
+                    while (enumerator.MoveNext())
+                    {
+                        if (enumerator.Current.Def.Description.Id == "AbilityDefP8")
+                        {
+                            flag = true;
+                        }
                     }
                 }
-                if ((!acepilot && settings.OnlyAcePilot) || !settings.OnlyAcePilot) {
-                    if (__instance.weightClass == WeightClass.LIGHT && settings.LightLosePip) {
-
+                int num = settings.PercentageToKeepPips;
+                if (flag)
+                {
+                    num = settings.PercentageToKeepPips + settings.AcePilotBonusPercentage;
+                }
+                bool flag2 = UnityEngine.Random.Range(1, 100) < num;
+                if (flag)
+                {
+                    if (__instance.MaxWalkDistance == 210f && settings.Movement210KeepPipsCount + settings.AcePilotBonusPips < __instance.EvasivePipsCurrent)
+                    {
                         Fields.LoosePip = true;
                     }
-                    else if (__instance.weightClass == WeightClass.MEDIUM && settings.MediumLosePip) {
+                    else if (__instance.MaxWalkDistance == 190f && settings.Movement190KeepPipsCount + settings.AcePilotBonusPips < __instance.EvasivePipsCurrent)
+                    {
                         Fields.LoosePip = true;
                     }
-                    else if (__instance.weightClass == WeightClass.HEAVY && settings.HeavyLosePip) {
+                    else if (__instance.MaxWalkDistance == 165f && settings.Movement165KeepPipsCount + settings.AcePilotBonusPips < __instance.EvasivePipsCurrent)
+                    {
                         Fields.LoosePip = true;
                     }
-                    else if (__instance.weightClass == WeightClass.ASSAULT && settings.AssaultLosePip) {
+                    else if (__instance.MaxWalkDistance == 140f && settings.Movement140KeepPipsCount + settings.AcePilotBonusPips < __instance.EvasivePipsCurrent)
+                    {
                         Fields.LoosePip = true;
                     }
+                    else if (__instance.MaxWalkDistance == 120f && settings.Movement120KeepPipsCount + settings.AcePilotBonusPips < __instance.EvasivePipsCurrent)
+                    {
+                        Fields.LoosePip = true;
+                    }
+                    else if (__instance.MaxWalkDistance == 95f && settings.Movement95KeepPipsCount + settings.AcePilotBonusPips < __instance.EvasivePipsCurrent)
+                    {
+                        Fields.LoosePip = true;
+                    }
+                    else if (!flag2)
+                    {
+                        Fields.LoosePip = true;
+                    }
+                }
+                else if (__instance.MaxWalkDistance == 210f && settings.Movement210KeepPipsCount < __instance.EvasivePipsCurrent)
+                {
+                    Fields.LoosePip = true;
+                }
+                else if (__instance.MaxWalkDistance == 190f && settings.Movement190KeepPipsCount < __instance.EvasivePipsCurrent)
+                {
+                    Fields.LoosePip = true;
+                }
+                else if (__instance.MaxWalkDistance == 165f && settings.Movement165KeepPipsCount < __instance.EvasivePipsCurrent)
+                {
+                    Fields.LoosePip = true;
+                }
+                else if (__instance.MaxWalkDistance == 140f && settings.Movement140KeepPipsCount < __instance.EvasivePipsCurrent)
+                {
+                    Fields.LoosePip = true;
+                }
+                else if (__instance.MaxWalkDistance == 120f && settings.Movement120KeepPipsCount < __instance.EvasivePipsCurrent)
+                {
+                    Fields.LoosePip = true;
+                }
+                else if (__instance.MaxWalkDistance == 95f && settings.Movement95KeepPipsCount < __instance.EvasivePipsCurrent)
+                {
+                    Fields.LoosePip = true;
+                }
+                else if (!flag2)
+                {
+                    Fields.LoosePip = true;
                 }
             }
-            catch (Exception e) {
-                Logger.LogError(e);
+            catch (Exception ex)
+            {
+                Logger.LogError(ex);
             }
         }
     }

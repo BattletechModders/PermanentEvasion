@@ -1,10 +1,14 @@
 ﻿namespace PermanentEvasion {
     public class Settings {
-        public bool LightLosePip = false;
-        public bool MediumLosePip = false;
-        public bool HeavyLosePip = false;
-        public bool AssaultLosePip = false;
-        public bool OnlyAcePilot = false;
+        public int AcePilotBonusPips;
+        public int Movement210KeepPipsCount;
+        public int Movement190KeepPipsCount;
+        public int Movement165KeepPipsCount;
+        public int Movement140KeepPipsCount;
+        public int Movement120KeepPipsCount;
+        public int Movement95KeepPipsCount;
+        public int PercentageToKeepPips;
+        public int AcePilotBonusPercentage;
     }
 
     public static class Fields {
